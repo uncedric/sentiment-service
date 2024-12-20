@@ -1,6 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import axios from 'axios';
 import SentimentDto from './dto/sentiment.dto';
+import { log, error } from 'console';
 
 @Injectable()
 export class SentimentAnalysisService {
@@ -18,19 +19,16 @@ export class SentimentAnalysisService {
         document,
       });
 
-      console.log('Analyzing sentiment for:', text);
-      console.log('Sentiment:', response.data.documentSentiment);
+      log('Analyzing sentiment for:', text);
+      log('Sentiment:', response.data.documentSentiment);
 
       const sentiment = response.data.documentSentiment;
       return {
         score: sentiment.score,
         magnitude: sentiment.magnitude,
       };
-    } catch (error) {
-      console.error(
-        'ERROR:',
-        error.response ? error.response.data : error.message,
-      );
+    } catch (err) {
+      error('ERROR:', err.response ? err.response.data : err.message);
       throw new HttpException(
         'Failed to analyze sentiment',
         HttpStatus.INTERNAL_SERVER_ERROR,
