@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs-app
+    ports:
+      - "3000:3000" # Expose NestJS on port 3000
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/sentiment-db # Connection string to MongoDB
+      API_KEY: 'REPLACE_WITH_YOUR_API_KEY' # API key for GCloud: https://console.cloud.google.com/apis/credentials
+      POSTS_LIMIT: 10
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017" # Expose MongoDB on default port
+    volumes:
+      - mongo-data:/data/db # Persist MongoDB data
+    environment:
+      MONGO_INITDB_DATABASE: sentiment-db
+
+volumes:
+  mongo-data:

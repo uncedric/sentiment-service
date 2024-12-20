@@ -7,7 +7,6 @@ import { SentimentAnalysisService } from 'src/sentiment/sentiment.service';
 
 @Module({
   imports: [
-    // MongooseModule.forRoot('mongodb://mongodb:27017/sentiment-db'),
     MongooseModule.forRoot(process.env.MONGO_URI),
     MongooseModule.forFeature([{ name: 'Post', schema: PostSchema }]),
   ],

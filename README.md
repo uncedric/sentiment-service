@@ -28,6 +28,7 @@ Create a service that can be easily tweaked to analyze social media. It could he
 - MongoDB
 - Basic Unit Tests
 - Sentiment Analysis
+- Docker version 27.4.1
 
 ## Project Setup
 
