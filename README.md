@@ -5,6 +5,7 @@
 The idea behind the project is to use REST API endpoints to generate reports from a social network (in this case, Reddit). The project will work as follows:
 
 - Select a subreddit to analyze, e.g., mentalhealth, overwatch, simracing, woodworking.
+  - A subreddit is a specific online community where people can create posts about the subreddit topic
 - The service will fetch the latest posts and store them in the database along with their sentiment analysis results.
 - Another endpoint will list all stored posts with their analysis results.
 
@@ -17,9 +18,9 @@ Create a service that can be easily tweaked to analyze social media. It could he
 
 ## Things I Would Improve with More Time
 - Use a more robust logger instead of just `console.log`.
-- Implement a Bitbucket Pipeline to automatically test, lint, and build the project.
+- Implement a Bitbucket Pipeline to automatically test, lint, and build the project when pushing code
 - Add pagination for the `GET` request.
-- Further abstract services to simplify unit test implementation.
+- Further abstract services to simplify unit test implementation
 - Add more tests.
 
 ## Features
@@ -32,7 +33,7 @@ Create a service that can be easily tweaked to analyze social media. It could he
 
 ## Project Setup
 
-**IMPORTANT:** Update the Docker Compose file to include your Google Cloud API Key.
+**IMPORTANT:** Update the Docker Compose file to include your Google Cloud API Key. (line 15)
 
 I chose this route rather than CLI authentication to simplify the containerization process.
 

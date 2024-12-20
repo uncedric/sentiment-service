@@ -19,6 +19,7 @@ export class RedditService {
   async getSubredditPosts(subreddit: string) {
     try {
       // get posts from subbreddit
+      log(`Fetching posts from subreddit ${subreddit}`);
       const redditApi = `https://api.reddit.com/r/${subreddit}/top.json?sort=new&t=day&limit=${this.POSTS_LIMIT}`;
       const result = await axios.get(redditApi);
 
@@ -42,7 +43,7 @@ export class RedditService {
       for (const post of posts) {
         log('post ', post.data.title);
 
-        // this is a blocking operation, we could use a queue system to avoid blocking the request but given the time constraints we will leave it like this
+        // this is a blocking operation, we could use a Promise.allsettled or something else to run all promises at once to avoid blocking the request but given the time constraints I'll leave it like this
         const analysisResult = await this.sentimentService.analyzeSentiment(
           post?.data?.title,
         );
